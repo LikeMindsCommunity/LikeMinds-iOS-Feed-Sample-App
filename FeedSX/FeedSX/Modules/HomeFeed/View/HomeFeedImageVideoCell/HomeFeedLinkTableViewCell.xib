@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qxl-j4-yig">
-                        <rect key="frame" x="0.0" y="6" width="320" height="72"/>
+                        <rect key="frame" x="0.0" y="6" width="320" height="89.333333333333329"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G63-2b-NKt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -29,10 +30,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eb0-1R-Yc8" userLabel="Topic Container View">
-                                <rect key="frame" x="0.0" y="64" width="320" height="8"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="25.333333333333329"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-5h-dSb" userLabel="Topic Feed" customClass="LMTopicView" customModule="FeedSX" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="8" width="288" height="0.0"/>
+                                        <rect key="frame" x="16" y="7.9999999999999982" width="288" height="17.333333333333329"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -49,10 +50,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaO-9m-sB9">
-                        <rect key="frame" x="0.0" y="78" width="320" height="503"/>
+                        <rect key="frame" x="0.0" y="95.333333333333343" width="320" height="485.66666666666663"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WUx-4u-a0I">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="503"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="485.66666666666669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chg-2c-Evd">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="111.66666666666667"/>
@@ -75,11 +76,21 @@
                                             <constraint firstAttribute="trailing" secondItem="AkN-oq-SDK" secondAttribute="trailing" constant="10" id="hjb-xu-4DD"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Myx-dd-J5v">
+                                        <rect key="frame" x="0.0" y="116.66666666666667" width="320" height="17.000000000000014"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="See More">
+                                            <color key="titleColor" systemColor="tintColor"/>
+                                            <imageReference key="image" image="chevron.down" catalog="system" symbolScale="small"/>
+                                        </state>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wU0-k1-4th">
-                                        <rect key="frame" x="0.0" y="116.66666666666666" width="320" height="386.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="138.66666666666669" width="320" height="347"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8QW-Yq-P7o">
-                                                <rect key="frame" x="16" y="0.0" width="288" height="386.33333333333331"/>
+                                                <rect key="frame" x="16" y="0.0" width="288" height="347"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sg5-q0-kp3">
                                                         <rect key="frame" x="0.0" y="0.0" width="288" height="162"/>
@@ -88,7 +99,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wQy-FN-Ovu">
-                                                        <rect key="frame" x="16" y="178.00000000000003" width="262" height="60.666666666666657"/>
+                                                        <rect key="frame" x="16" y="178" width="262" height="60.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sh-cv-ghF" customClass="LMLabel" customModule="FeedSX" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="32.666666666666664" height="19.333333333333332"/>
@@ -187,14 +198,19 @@
                 <outlet property="linkThumbnailImageView" destination="Sg5-q0-kp3" id="aqC-Hc-pAu"/>
                 <outlet property="linkTitleLabel" destination="9Sh-cv-ghF" id="QWr-rU-1H0"/>
                 <outlet property="profileSectionView" destination="G63-2b-NKt" id="rNZ-b0-AYN"/>
+                <outlet property="seeMoreButton" destination="Myx-dd-J5v" id="hOc-uE-nCk"/>
                 <outlet property="topicFeedView" destination="pvR-5h-dSb" id="pIf-nm-z2L"/>
             </connections>
             <point key="canvasLocation" x="-76.33587786259541" y="101.05633802816902"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

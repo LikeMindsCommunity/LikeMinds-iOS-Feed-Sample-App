@@ -333,15 +333,15 @@ extension PostDetailViewController: UITableViewDataSource, UITableViewDelegate, 
             switch post.postAttachmentType() {
             case .document:
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedDocumentTableViewCell.nibName, for: indexPath) as! HomeFeedDocumentTableViewCell
-                cell.setupFeedCell(post, withDelegate: self)
+                cell.setupFeedCell(post, withDelegate: self, indexPath: indexPath)
                 return cell
             case .link:
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedLinkTableViewCell.nibName, for: indexPath) as! HomeFeedLinkTableViewCell
-                cell.setupFeedCell(post, withDelegate: self)
+                cell.setupFeedCell(post, withDelegate: self, indexPath: indexPath)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedImageVideoTableViewCell.nibName, for: indexPath) as! HomeFeedImageVideoTableViewCell
-                cell.setupFeedCell(post, withDelegate: self)
+                cell.setupFeedCell(post, withDelegate: self, indexPath: indexPath)
                 return cell
             }
         }
@@ -678,5 +678,14 @@ extension PostDetailViewController: DeleteContentViewProtocol {
             self.setAttributedTextForNoComments()
         }
         self.postDetailTableView.reloadData()
+    }
+}
+
+
+extension PostDetailViewController: HomeFeedTableViewCellDelegate {
+    func didTapOnSeeMore(_ indexPath: IndexPath) {
+        viewModel.postDetail?.isShowMore.toggle()
+        postDetailTableView.reloadRows(at: [indexPath], with: .automatic)
+        postDetailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }

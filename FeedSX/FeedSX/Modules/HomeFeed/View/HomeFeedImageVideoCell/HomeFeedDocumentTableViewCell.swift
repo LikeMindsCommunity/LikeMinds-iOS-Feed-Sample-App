@@ -13,6 +13,11 @@ class HomeFeedDocumentTableViewCell: UITableViewCell {
     static let bundle = Bundle(for: HomeFeedDocumentTableViewCell.self)
     weak var delegate: HomeFeedTableViewCellDelegate?
     
+    @IBOutlet private weak var seeMoreBtn: UIButton! {
+        didSet {
+            seeMoreBtn.addTarget(self, action: #selector(didTapSeeMoreButton), for: .touchUpInside)
+        }
+    }
     @IBOutlet private weak var profileSectionView: UIView!
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var actionsSectionView: UIView!
@@ -42,6 +47,7 @@ class HomeFeedDocumentTableViewCell: UITableViewCell {
     }()
     
     var feedData: PostFeedDataView?
+    private var indexPath: IndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -87,11 +93,12 @@ class HomeFeedDocumentTableViewCell: UITableViewCell {
         self.tableView()?.endUpdates()
     }
     
-    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true) {
+    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true, indexPath: IndexPath) {
         self.feedData = feedDataView
         self.delegate = delegate
+        self.indexPath = indexPath
         profileSectionHeader.setupProfileSectionData(feedDataView, delegate: delegate)
-        setupCaption()
+        setupCaption(isShowMore: feedDataView.isShowMore)
         let count = self.feedData?.attachments?.count ?? 0
         self.collectionSuperViewHeightConstraint.constant = CGFloat(90 * (count > 2 ? 2 : count))
         if count > 2 {
@@ -128,13 +135,25 @@ class HomeFeedDocumentTableViewCell: UITableViewCell {
         }
     }
     
-    private func setupCaption() {
+    private func setupCaption(isShowMore: Bool) {
+        captionLabel.textContainer.maximumNumberOfLines = 0
         let caption = self.feedData?.caption ?? ""
         self.captionLabel.text = caption
         self.captionSectionView.isHidden = caption.isEmpty
         self.captionLabel.attributedText = TaggedRouteParser.shared.getTaggedParsedAttributedString(with: caption, forTextView: true, withTextColor: ColorConstant.postCaptionColor)
+        
+        seeMoreBtn.setTitle(!isShowMore ? "Show More" : "Show Less", for: .normal)
+        seeMoreBtn.setImage(UIImage(systemName: !isShowMore ? "chevron.down" : "chevron.up"), for: .normal)
+        seeMoreBtn.semanticContentAttribute = .forceRightToLeft
+        seeMoreBtn.isHidden = captionLabel.numberOfLines() < 4
+        captionLabel.textContainer.maximumNumberOfLines = isShowMore ? 0 : 4
     }
     
+    @objc
+    private func didTapSeeMoreButton() {
+        guard let indexPath else { return }
+        delegate?.didTapOnSeeMore(indexPath)
+    }
 }
 
 extension HomeFeedDocumentTableViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {

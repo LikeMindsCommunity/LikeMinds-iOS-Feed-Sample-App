@@ -306,14 +306,16 @@ public final class HomeFeedViewControler: BaseViewController {
         print("postCreationStarted")
         self.isPostCreatingInProgress = true
         self.postingImageSuperView.superview?.isHidden = false
+        
         if let image = notification.object as? UIImage {
             postingImageView.superview?.isHidden = false
             postingImageView.image = image
         } else {
             self.postingImageView.isHidden = true
         }
-        if homeFeedViewModel.feeds.count > 0 {
-            self.feedTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        
+        if !homeFeedViewModel.feeds.isEmpty {
+            feedTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
     
@@ -507,15 +509,15 @@ extension HomeFeedViewControler: UITableViewDelegate, UITableViewDataSource {
         switch feed.postAttachmentType() {
         case .document:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedDocumentTableViewCell.nibName, for: indexPath) as! HomeFeedDocumentTableViewCell
-            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false)
+            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false, indexPath: indexPath)
             return cell
         case .link:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedLinkTableViewCell.nibName, for: indexPath) as! HomeFeedLinkTableViewCell
-            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false)
+            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false, indexPath: indexPath)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedImageVideoTableViewCell.nibName, for: indexPath) as! HomeFeedImageVideoTableViewCell
-            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false)
+            cell.setupFeedCell(feed, withDelegate: self, isSepratorShown: false, indexPath: indexPath)
             return cell
         }
     }
@@ -742,6 +744,12 @@ extension HomeFeedViewControler: HomeFeedTableViewCellDelegate {
         let postDetail = PostDetailViewController(nibName: "PostDetailViewController", bundle: Bundle(for: PostDetailViewController.self))
         postDetail.postId = postId
         self.navigationController?.pushViewController(postDetail, animated: true)
+    }
+    
+    func didTapOnSeeMore(_ indexPath: IndexPath) {
+        homeFeedViewModel.feeds[indexPath.row].isShowMore.toggle()
+        feedTableView.reloadRows(at: [indexPath], with: .automatic)
+        feedTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }
 

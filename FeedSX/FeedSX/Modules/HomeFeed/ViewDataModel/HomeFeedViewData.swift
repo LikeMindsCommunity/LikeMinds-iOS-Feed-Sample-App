@@ -26,6 +26,7 @@ final class PostFeedDataView {
     var postMenuItems: [MenuItem]?
     var topics: [TopicViewCollectionCell.ViewModel] = []
     var topicFeedHeight: CGFloat?
+    var isShowMore: Bool
     
     init(post: Post, user: User?, topics: [TopicFeedResponse.TopicResponse]) {
         self.postId = post.id
@@ -37,6 +38,7 @@ final class PostFeedDataView {
         self.isSaved = post.isSaved ?? false
         self.isEdited = post.isEdited ?? false
         self.postTime = (post.createdAt ?? 0)/1000
+        self.isShowMore = false
         self.postMenuItems = self.menuItems(post: post)
         self.postByUser = postByUser(user: user)
         self.imageVideos = imageVideoAttachments(post: post)

@@ -145,9 +145,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F40CC6A92AC765C1000A2CA0 /* PBXContainerItemProxy */ = {
+		E51135DD2B1DF15B0019FD4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F40CC6A52AC765C1000A2CA0 /* LikeMindsFeed.xcodeproj */;
+			containerPortal = E51135D92B1DF15B0019FD4D /* LikeMindsFeed.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F414169C299E41C000622058;
 			remoteInfo = LikeMindsFeed;
@@ -165,6 +165,7 @@
 		78CF06D4711533978898BA48 /* Pods-FeedSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedSX.debug.xcconfig"; path = "Target Support Files/Pods-FeedSX/Pods-FeedSX.debug.xcconfig"; sourceTree = "<group>"; };
 		841AF5F2C16456E212FAC2C3 /* Pods-FeedSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedSX.release.xcconfig"; path = "Target Support Files/Pods-FeedSX/Pods-FeedSX.release.xcconfig"; sourceTree = "<group>"; };
 		A047BB966FC282078791220D /* Pods_FeedSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FeedSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51135D92B1DF15B0019FD4D /* LikeMindsFeed.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LikeMindsFeed.xcodeproj; path = "../../../SDK/LikeMinds-iOS-Feed-SDK/LikeMindsFeed.xcodeproj"; sourceTree = "<group>"; };
 		E54E895C2ABAFC3100F0E7DF /* TagsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsLayout.swift; sourceTree = "<group>"; };
 		E54E895E2ABB103000F0E7DF /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		E54E89672ABB448E00F0E7DF /* SelectTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTopicViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		F405D10429E811600074F531 /* SpecialCharString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharString.swift; sourceTree = "<group>"; };
 		F405D10629E8843F0074F531 /* ReportContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportContentViewModel.swift; sourceTree = "<group>"; };
 		F405D10829E885660074F531 /* ASImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASImageDownloader.swift; sourceTree = "<group>"; };
-		F40CC6A52AC765C1000A2CA0 /* LikeMindsFeed.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LikeMindsFeed.xcodeproj; path = "../../Feed-SDK/LikeMindsFeed.xcodeproj"; sourceTree = "<group>"; };
 		F40CC6B12AC76719000A2CA0 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		F41731C72A1A7CF7005FD279 /* NetworkOperationQueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationQueueManager.swift; sourceTree = "<group>"; };
 		F41731C92A1A7D47005FD279 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -328,6 +328,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E51135DA2B1DF15B0019FD4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E51135DE2B1DF15B0019FD4D /* LikeMindsFeed.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E54E89642ABB3D6100F0E7DF /* SelectTopicView */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,14 +429,6 @@
 				F49F6BF82A1C8AF1005B2A81 /* Message.swift */,
 			);
 			path = Constant;
-			sourceTree = "<group>";
-		};
-		F40CC6A62AC765C1000A2CA0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F40CC6AA2AC765C1000A2CA0 /* LikeMindsFeed.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		F41731C62A1A7CB0005FD279 /* OperationQueue */ = {
@@ -752,7 +752,7 @@
 		F4C332F929CDC83200AD5F52 = {
 			isa = PBXGroup;
 			children = (
-				F40CC6A52AC765C1000A2CA0 /* LikeMindsFeed.xcodeproj */,
+				E51135D92B1DF15B0019FD4D /* LikeMindsFeed.xcodeproj */,
 				F4C3330529CDC83200AD5F52 /* FeedSX */,
 				F4C3330429CDC83200AD5F52 /* Products */,
 				F4A4EFA329D6A5E500829E5E /* Frameworks */,
@@ -959,8 +959,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = F40CC6A62AC765C1000A2CA0 /* Products */;
-					ProjectRef = F40CC6A52AC765C1000A2CA0 /* LikeMindsFeed.xcodeproj */;
+					ProductGroup = E51135DA2B1DF15B0019FD4D /* Products */;
+					ProjectRef = E51135D92B1DF15B0019FD4D /* LikeMindsFeed.xcodeproj */;
 				},
 				{
 					ProductGroup = F4A86B8B2A2DCB2900C7D5C2 /* Products */;
@@ -975,11 +975,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F40CC6AA2AC765C1000A2CA0 /* LikeMindsFeed.framework */ = {
+		E51135DE2B1DF15B0019FD4D /* LikeMindsFeed.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = LikeMindsFeed.framework;
-			remoteRef = F40CC6A92AC765C1000A2CA0 /* PBXContainerItemProxy */;
+			remoteRef = E51135DD2B1DF15B0019FD4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F4A86BC12A2E676200C7D5C2 /* LikeMindsFeed.framework */ = {

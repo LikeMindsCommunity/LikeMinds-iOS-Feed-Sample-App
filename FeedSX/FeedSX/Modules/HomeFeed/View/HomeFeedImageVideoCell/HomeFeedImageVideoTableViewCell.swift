@@ -11,11 +11,13 @@ import Kingfisher
 protocol HomeFeedTableViewCellDelegate: AnyObject {
     func didTapOnFeedCollection(_ feedDataView: PostFeedDataView?)
     func didTapOnCell(_ feedDataView: PostFeedDataView?)
+    func didTapOnSeeMore(_ indexPath: IndexPath)
 }
 
 extension HomeFeedTableViewCellDelegate {
     func didTapOnFeedCollection(_ feedDataView: PostFeedDataView?) {}
     func didTapOnCell(_ feedDataView: PostFeedDataView?) {}
+    func didTapOnSeeMore(_ indexPath: IndexPath) {}
 }
 
 class HomeFeedImageVideoTableViewCell: UITableViewCell {
@@ -24,6 +26,11 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
     static let bundle = Bundle(for: HomeFeedImageVideoTableViewCell.self)
     weak var delegate: HomeFeedTableViewCellDelegate?
     
+    @IBOutlet private weak var seeMoreBtn: UIButton! {
+        didSet {
+            seeMoreBtn.addTarget(self, action: #selector(didTapSeeMoreButton), for: .touchUpInside)
+        }
+    }
     @IBOutlet private weak var profileSectionView: UIView!
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var actionsSectionView: UIView!
@@ -54,6 +61,7 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
     }()
     
     var feedData: PostFeedDataView?
+    private var indexPath: IndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,7 +76,6 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
     }
     
     @objc func tappedTextView(tapGesture: LMTapGesture) {
@@ -79,11 +86,6 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
         } else {
             delegate?.didTapOnFeedCollection(self.feedData)
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
     }
     
     fileprivate func setupActionSectionFooter() {
@@ -98,11 +100,12 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
     
     fileprivate func setupCaptionSectionView() {}
     
-    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true) {
+    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true, indexPath: IndexPath) {
         self.feedData = feedDataView
         self.delegate = delegate
+        self.indexPath = indexPath
         profileSectionHeader.setupProfileSectionData(feedDataView, delegate: delegate)
-        setupCaption()
+        setupCaption(isShowMore: feedDataView.isShowMore)
         actionFooterSectionView.setupActionFooterSectionData(feedDataView, delegate: delegate)
         topicFeed.configure(with: feedDataView.topics, isSepratorShown: isSepratorShown)
         topicFeed.superview?.isHidden = feedDataView.topics.isEmpty
@@ -145,13 +148,25 @@ class HomeFeedImageVideoTableViewCell: UITableViewCell {
         }
     }
     
-    private func setupCaption() {
+    private func setupCaption(isShowMore: Bool) {
+        captionLabel.textContainer.maximumNumberOfLines = 0
         let caption = self.feedData?.caption ?? ""
         self.captionLabel.text = caption
         self.captionSectionView.isHidden = caption.isEmpty
         self.captionLabel.attributedText = TaggedRouteParser.shared.getTaggedParsedAttributedString(with: caption, forTextView: true, withTextColor: ColorConstant.postCaptionColor)
+        
+        seeMoreBtn.setTitle(!isShowMore ? "Show More" : "Show Less", for: .normal)
+        seeMoreBtn.setImage(UIImage(systemName: !isShowMore ? "chevron.down" : "chevron.up"), for: .normal)
+        seeMoreBtn.semanticContentAttribute = .forceRightToLeft
+        seeMoreBtn.isHidden = captionLabel.numberOfLines() < 4
+        captionLabel.textContainer.maximumNumberOfLines = isShowMore ? 0 : 4
     }
     
+    @objc
+    private func didTapSeeMoreButton() {
+        guard let indexPath else { return }
+        delegate?.didTapOnSeeMore(indexPath)
+    }
 }
 
 extension HomeFeedImageVideoTableViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
@@ -276,4 +291,22 @@ extension HomeFeedImageVideoTableViewCell:  UICollectionViewDelegate, UICollecti
 
 class LMTapGesture: UITapGestureRecognizer {
     var index = Int()
+}
+
+
+extension UITextView {
+    func numberOfLines() -> Int {
+        var nbLines = 0
+        var glyphIndex = 0
+        let numberOfGlyphs = layoutManager.numberOfGlyphs
+        
+        while glyphIndex < numberOfGlyphs {
+            var lineRange = NSRange()
+            layoutManager.lineFragmentRect(forGlyphAt: glyphIndex, effectiveRange: &lineRange)
+            glyphIndex = NSMaxRange(lineRange) // Skip to after the last glyph of the line for the next iteration
+            nbLines += 1
+        }
+        
+        return nbLines
+    }
 }

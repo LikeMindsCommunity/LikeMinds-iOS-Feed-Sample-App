@@ -13,6 +13,11 @@ class HomeFeedLinkTableViewCell: UITableViewCell {
     static let bundle = Bundle(for: HomeFeedLinkTableViewCell.self)
     weak var delegate: HomeFeedTableViewCellDelegate?
     
+    @IBOutlet private weak var seeMoreButton: UIButton! {
+        didSet {
+            
+        }
+    }
     @IBOutlet private weak var profileSectionView: UIView!
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var actionsSectionView: UIView!
@@ -44,7 +49,8 @@ class HomeFeedLinkTableViewCell: UITableViewCell {
     }()
     
     var feedData: PostFeedDataView?
-
+    private var indexPath: IndexPath?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -92,11 +98,12 @@ class HomeFeedLinkTableViewCell: UITableViewCell {
         self.tableView()?.endUpdates()
     }
     
-    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true) {
+    func setupFeedCell(_ feedDataView: PostFeedDataView, withDelegate delegate: HomeFeedTableViewCellDelegate?, isSepratorShown: Bool = true, indexPath: IndexPath) {
         self.feedData = feedDataView
         self.delegate = delegate
+        self.indexPath = indexPath
         profileSectionHeader.setupProfileSectionData(feedDataView, delegate: delegate)
-        setupCaption()
+        setupCaption(isShowMore: feedDataView.isShowMore)
         actionFooterSectionView.setupActionFooterSectionData(feedDataView, delegate: delegate)
         setupLinkCell(feedDataView.linkAttachment?.title, description: feedDataView.linkAttachment?.description, link: feedDataView.linkAttachment?.url, linkThumbnailUrl: feedDataView.linkAttachment?.linkThumbnailUrl)
         topicFeedView.configure(with: feedDataView.topics, isSepratorShown: isSepratorShown)
@@ -117,11 +124,18 @@ class HomeFeedLinkTableViewCell: UITableViewCell {
         self.containerView.layoutIfNeeded()
     }
     
-    private func setupCaption() {
+    private func setupCaption(isShowMore: Bool) {
+        captionLabel.textContainer.maximumNumberOfLines = 0
         let caption = self.feedData?.caption ?? ""
         self.captionLabel.text = caption
         self.captionSectionView.isHidden = caption.isEmpty
         self.captionLabel.attributedText = TaggedRouteParser.shared.getTaggedParsedAttributedString(with: caption, forTextView: true, withTextColor: ColorConstant.postCaptionColor)
+        
+        seeMoreButton.setTitle(!isShowMore ? "Show More" : "Show Less", for: .normal)
+        seeMoreButton.setImage(UIImage(systemName: !isShowMore ? "chevron.down" : "chevron.up"), for: .normal)
+        seeMoreButton.semanticContentAttribute = .forceRightToLeft
+        seeMoreButton.isHidden = captionLabel.numberOfLines() < 4
+        captionLabel.textContainer.maximumNumberOfLines = isShowMore ? 0 : 4
     }
     
     @IBAction func clickedLinkView(_ sender: UIButton) {
@@ -137,5 +151,11 @@ class HomeFeedLinkTableViewCell: UITableViewCell {
             guard let url = myURL else { return }
             UIApplication.shared.open(url)
         }
+    }
+    
+    @objc
+    private func didTapSeeMoreButton() {
+        guard let indexPath else { return }
+        delegate?.didTapOnSeeMore(indexPath)
     }
 }
