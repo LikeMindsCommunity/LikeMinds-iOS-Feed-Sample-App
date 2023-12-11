@@ -169,9 +169,9 @@ final class EditPostViewModel: BaseViewModel {
     
     func editPost(_ text: String?) {
         let parsedTaggedUserPostText = TaggedRouteParser.shared.editAnswerTextWithTaggedList(text: text, taggedUsers: self.taggedUsers)
-        if self.imageAndVideoAttachments.count > 0 {
+        if !imageAndVideoAttachments.isEmpty {
             self.editPostWithImageOrVideoAttachment(postCaption: parsedTaggedUserPostText)
-        } else if self.documentAttachments.count > 0 {
+        } else if !documentAttachments.isEmpty {
             self.editPostWithDocAttachment(postCaption: parsedTaggedUserPostText)
         } else if self.linkAttatchment != nil {
             self.editPostWithLinkAttachment(postCaption: parsedTaggedUserPostText)
@@ -209,20 +209,20 @@ private extension EditPostViewModel {
     }
     
     func editPostWithDocAttachment(postCaption: String) {
-        var documentAttachments: [AWSFileUploadRequest] = []
+        var newDocumentAttachments: [AWSFileUploadRequest] = []
         var index = 0
         for attachedItem in self.documentAttachments {
             guard let fileUrl = attachedItem.attachmentUrl else { continue }
             let fileType: UploaderType = .file
             let item = AWSFileUploadRequest(fileUrl: fileUrl, awsFilePath: filePath, fileType: fileType, index: index, name: attachedItem.name ?? "document_\(Date().millisecondsSince1970)")
-            item.awsUploadedUrl = fileUrl.hasPrefix("amazonaws.com") ? fileUrl : nil
+            item.awsUploadedUrl = fileUrl.contains("amazonaws.com") ? fileUrl : nil
             item.thumbnailImage = attachedItem.thumbnailImage
             item.documentAttachmentSize = attachedItem.attachmentSize
             item.documentNumberOfPages = attachedItem.numberOfPages
-            documentAttachments.append(item)
+            newDocumentAttachments.append(item)
             index += 1
         }
-        EditPostOperation.shared.editPostWithAttachment(attachments: documentAttachments, postCaption: postCaption, postId: self.postId, topics: selectedTopicIds)
+        EditPostOperation.shared.editPostWithAttachment(attachments: newDocumentAttachments, postCaption: postCaption, postId: self.postId, topics: selectedTopicIds)
     }
     
     func editPostWithImageOrVideoAttachment(postCaption: String) {

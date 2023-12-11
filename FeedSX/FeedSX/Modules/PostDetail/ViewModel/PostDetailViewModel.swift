@@ -384,7 +384,13 @@ final class PostDetailViewModel: BaseViewModel {
     
     func totalCommentsCount() -> String {
         let count = (self.postDetail?.commentCount) ?? 0
-        let commentString = count > 1 ? "comments" : "comment"
-        return "\(count) \(commentString)"
+        switch count {
+        case 0:
+            return "0 comments"
+        case 1:
+            return "1 comment"
+        default:
+            return "\(count) comments"
+        }
     }
 }

@@ -310,7 +310,8 @@ class CommentHeaderViewCell: UITableViewHeaderFooterView {
     }
     
     @objc private func likeTapped(sender: LMTapGesture) {
-        guard let commentId = self.comment?.commentId else { return }
+        guard let commentId = self.comment?.commentId,
+        !commentId.isEmpty else { return }
         let isLike = !(self.comment?.isLiked ?? false)
         self.comment?.isLiked = isLike
         self.comment?.likedCount += isLike ? 1 : -1

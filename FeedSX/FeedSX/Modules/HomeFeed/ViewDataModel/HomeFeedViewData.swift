@@ -139,9 +139,9 @@ final class PostFeedDataView {
         
         func attachmentDetails() -> String {
             let size = (self.attachmentSize ?? 0)/1000
-//            let sizeString: String = (size > 1023) ? "\(size/1024) Mb" : "\(size) Kb"
+            let sizeString: String = (size > 1023) ? "\(size/1024) Mb" : "\(size) Kb"
             let numberOfPagesString = (self.numberOfPages ?? 0) > 0 ? "\(self.numberOfPages ?? 0) Pages • " : ""
-            return "\(numberOfPagesString)\(size) Kb • \(self.attachmentType ?? "")"
+            return "\(numberOfPagesString)\(sizeString) • \(self.attachmentType ?? "")"
         }
     }
     

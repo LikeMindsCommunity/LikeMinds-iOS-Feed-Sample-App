@@ -148,12 +148,6 @@ class EditPostViewController: BaseViewController {
             return
         }
         
-        if viewModel.selectedTopics.contains(where: { !$0.isEnabled }) {
-            //TODO:- Need to check with Devansh
-            showErrorAlert(message: "This Post Contains some ")
-            return
-        }
-        
         if (self.viewModel.currentSelectedUploadeType == .link), let _ = text.detectedFirstLink {
             self.viewModel.verifyOgTagsAndEditPost(message: text) {[weak self] in
                 self?.viewModel.editPost(text)

@@ -96,8 +96,8 @@ class EditPostOperation {
     }
     
     private func editPostWithAttachments(postId: String, postCaption: String?, topics: [String]) {
-        guard let attachmentList = self.attachmentList else {return}
-        if attachmentList.count > 0 {
+        guard let attachmentList else {return}
+        if !attachmentList.isEmpty {
             var attachments: [Attachment] = []
             for attachedItem in attachmentList {
                 switch attachedItem.fileType {
