@@ -21,6 +21,10 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/LikeMindsCommunity/LikeMinds-iOS-Feed-Sample-App.git", :tag => "v#{spec.version}" }
 
   spec.source_files  = "**/*.{swift}"
+  spec.resource = '**/*.{xib}'
+  spec.resource_bundles = {
+     'FeedSX' => ['**/*.{xcassets}']
+  }
 
   spec.dependency "Kingfisher"
   spec.dependency "AWSCore"
