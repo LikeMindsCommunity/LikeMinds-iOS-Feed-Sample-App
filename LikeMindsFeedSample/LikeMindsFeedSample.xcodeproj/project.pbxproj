@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A64B71F5989B4E98BEE37FB0 /* Pods_LikeMindsFeedSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D3962ACFCA784F1CD3710B /* Pods_LikeMindsFeedSample.framework */; };
-		F44ECC522A2F2E5D0096DCC6 /* FeedSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A86BAF2A2E27A900C7D5C2 /* FeedSX.framework */; };
-		F44ECC532A2F2E5D0096DCC6 /* FeedSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4A86BAF2A2E27A900C7D5C2 /* FeedSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4BB415229ABC7970033F26E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB415129ABC7970033F26E /* AppDelegate.swift */; };
 		F4BB415429ABC7970033F26E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB415329ABC7970033F26E /* SceneDelegate.swift */; };
 		F4BB415629ABC7970033F26E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB415529ABC7970033F26E /* ViewController.swift */; };
@@ -19,16 +17,6 @@
 		F4EA97AF2A15E6570020E672 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EA97AE2A15E6570020E672 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		F4A86BAE2A2E27A900C7D5C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F4A86BA92A2E27A900C7D5C2 /* FeedSX.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F4C3330329CDC83200AD5F52;
-			remoteInfo = FeedSX;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		F44ECC542A2F2E5D0096DCC6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -36,7 +24,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F44ECC532A2F2E5D0096DCC6 /* FeedSX.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,7 +38,6 @@
 		F46E15C12A25D9A0003C43BA /* LikeMindsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LikeMindsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F487732929AC9DAD00A7B0D0 /* LMFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LMFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A86B922A2DCB4900C7D5C2 /* LikeMindsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LikeMindsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4A86BA92A2E27A900C7D5C2 /* FeedSX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeedSX.xcodeproj; path = ../FeedSX/FeedSX.xcodeproj; sourceTree = "<group>"; };
 		F4BB414E29ABC7970033F26E /* LikeMindsFeedSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LikeMindsFeedSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BB415129ABC7970033F26E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BB415329ABC7970033F26E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F44ECC522A2F2E5D0096DCC6 /* FeedSX.framework in Frameworks */,
 				A64B71F5989B4E98BEE37FB0 /* Pods_LikeMindsFeedSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,18 +75,9 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F4A86BAA2A2E27A900C7D5C2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F4A86BAF2A2E27A900C7D5C2 /* FeedSX.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F4BB414529ABC7970033F26E = {
 			isa = PBXGroup;
 			children = (
-				F4A86BA92A2E27A900C7D5C2 /* FeedSX.xcodeproj */,
 				F4BB415029ABC7970033F26E /* LikeMindsFeedSample */,
 				F4BB414F29ABC7970033F26E /* Products */,
 				F4BB416529ABC8F80033F26E /* Frameworks */,
@@ -198,28 +174,12 @@
 			mainGroup = F4BB414529ABC7970033F26E;
 			productRefGroup = F4BB414F29ABC7970033F26E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = F4A86BAA2A2E27A900C7D5C2 /* Products */;
-					ProjectRef = F4A86BA92A2E27A900C7D5C2 /* FeedSX.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				F4BB414D29ABC7970033F26E /* LikeMindsFeedSample */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		F4A86BAF2A2E27A900C7D5C2 /* FeedSX.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FeedSX.framework;
-			remoteRef = F4A86BAE2A2E27A900C7D5C2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F4BB414C29ABC7970033F26E /* Resources */ = {
